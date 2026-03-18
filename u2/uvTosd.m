@@ -10,6 +10,6 @@ function [s,d] = uvTosd(u, v, uk, vk)
     num = sin(dv) .* cos(u);
     denom = -sin(u) * cos(uk) + cos(u) .* cos(dv) * sin(uk);
 
-    d = atan2(num, denom);
+    d = -atan2(num, denom);
 
 end

@@ -9,7 +9,51 @@ vk = 20 * pi / 180;
 
 [s,d] = uvTosd(u, v, uk, vk);
 
-%Draw graticule, gnomonic projection
-umin = 5 * pi / 180
-umax = 90 * pi / 180
+%Draw graticule, gnomonic projection, normal aspect
+% umin = 20 * pi / 180;
+% umax = 90 * pi / 180;
+% vmin = -180 * pi / 180;
+% vmax = 180 * pi / 180;
+% Du = 10 * pi/180;
+% Dv = Du;
+% du = pi/180;
+% dv = du;
+% R = 1;
+% uk = 90*pi/180;
+% vk = pi/180;
+% u0 = pi/4;
+% proj = @gnom 
+% 
+% [XM, YM, XP, YP] = graticule(umin, umax, vmin, vmax, Du, Dv, du, dv, R, uk, vk, u0, proj);
+
+hold on
+axis equal
+plot(XM, YM);
+plot(XP, YP);
+
+%Draw graticule, gnomonic projection, transverse aspect
+umin = -45 * pi / 180;
+umax = 45 * pi / 180;
+vmin = -180 * pi / 180;
+vmax = 180 * pi / 180;
+Du = 10 * pi/180;
+Dv = Du;
+du = pi/180;
+dv = du;
+R = 1;
+uk = 0;
+vk = pi/2;
+u0 = pi/4;
+proj = @gnom 
+
+[XM, YM, XP, YP] = graticule(umin, umax, vmin, vmax, Du, Dv, du, dv, R, uk, vk, u0, proj);
+
+hold on
+axis equal
+plot(XM, YM);
+plot(XP, YP);
+
+
+
+
 
