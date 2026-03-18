@@ -1,5 +1,4 @@
-function [XM, YM, XP, YP] = graticule(umin, umax, vmin, vmax, Du, Dv, du, dv,...
-                                    R, uk, vk, u0, proj)
+function [XM, YM, XP, YP] = graticule(umin, umax, vmin, vmax, Du, Dv, du, dv, R, uk, vk, u0, proj)
 %Create graticule: list of meridians and parallels
 
 %Create list of meridians
@@ -12,7 +11,7 @@ for v = vmin:Dv:vmax
     vm = ones(1, n)*v;
     
     %Convert to oblique aspect
-    [sm, dm] = uv_sd(um, vm, uk, vk);
+    [sm, dm] = uvTosd(um, vm, uk, vk);
 
     %Compute xm, ym
     [xm, ym] = proj(R, sm, dm, u0);
@@ -33,7 +32,7 @@ for u = umin:Du:umax
     up = ones(1, n)*u;
     
     %Convert to oblique aspect
-    [sp, dp] = uv_sd(up, vp, uk, vk);
+    [sp, dp] = uvTosd(up, vp, uk, vk);
 
     %Compute xp, yp
     [xp, yp] = proj(R, sp, dp, u0);
