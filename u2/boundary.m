@@ -8,4 +8,4 @@ function[XB,YB] = boundary(R, uk, vk, s0, proj, ub, vb)
 s_min = 45 * pi/180;
 
 %Project points
-[XB, YB] = gnom(R, sb, db, s0);
+[XB, YB] = proj(R, sb, db, s0);
