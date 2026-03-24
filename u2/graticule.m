@@ -37,7 +37,7 @@ for u = umin:Du:umax
     %Compute xp, yp
     [xp, yp] = proj(R, sp, dp, u0);
 
-    %Add parellel to the list
+    %Add parallel to the list
     XP = [XP; xp];
     YP = [YP; yp];
 
