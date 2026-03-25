@@ -37,7 +37,7 @@ uk = 90*pi/180;
 vk = 0;
 u0 = pi/4;
 proj = @gnom
-file = 'continents_points\eur.txt'
+file = 'v:\Bayer\mk_2025_26\u2\continents_points\eur.txt'
 [XC, YC] = drawContinent(file, R, uk, vk, u0, proj)
 plot (XC, YC, 'b', 'LineWidth', 3)
 
