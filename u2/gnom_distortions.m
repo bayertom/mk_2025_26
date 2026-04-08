@@ -62,9 +62,30 @@ un = 35.2644 * pi/180;
 vn = 0;
 Rn = 1;
 
+%Coordinates
 xn = double(subs(x,{u,v,R},{un,vn,Rn}));
 yn = double(subs(y,{u,v,R},{un,vn,Rn}));
 
+%Local linear scales
+mpn = sqrt(double(subs(mp2,{u,v,R},{un,vn,Rn})));
+mrn = sqrt(double(subs(mr2,{u,v,R},{un,vn,Rn})));
+pn = double(subs(p,{u,v,R},{un,vn,Rn}));
+
+%Angle between meridian and prarallel
+omegan = double(subs(omega,{u,v,R},{un,vn,Rn}))
+
+%Area scale
+Pn = double(subs(P,{u,v,R},{un,vn,Rn}))
+
+%Convergence
+convn = double(subs(conv,{u,v,R},{un,vn,Rn}))
+
+%Extreme azimuths
+A1 = 0;
+A2 = pi/2;
+
+%Maximum angular distortion
+mad = 2*asin(abs(mpn - mrn)/(mpn + mrn))
 
 
 

@@ -37,7 +37,19 @@ def WGSToJTSK (phi_WGS, la_WGS):
     la_Bes = atan2(Y_Bes,X_Bes)
     tan_phi_Bes = Z_Bes / ((1 - e2_Bes) * sqrt(X_Bes**2 + Y_Bes**2))
     phi_Bes = atan(tan_phi_Bes)
-
+    
+    #Shift to Feerro
+    la_Ferro = la_Bes + (17 + 2/3) * pi / 180
+    
+    #Gauss conformal projection, parameters
+    phi0 = 49.5 * pi / 180
+    alpha = sqrt (1 + e2_Bes * (cos(phi0))**4 / (1 - e2_Bes))
+    u0 = asin(sin(phi0)/alpha)
+    
+    kn = (tan(phi0/2+pi/4)**alpha*((1-sqrt(e2_Bes)*sin(phi0))/(1+sqrt(e2_Bes)*sin(phi0)))**(alpha*sqrt(e2_Bes)/2))
+    kd = tan(u0/2+pi/4)
+    k = kn / kd
+    
 #Input coordinates
 phi_WGS = 50 * pi/180
 la_WGS = 15 * pi/180
