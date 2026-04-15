@@ -49,6 +49,8 @@ def WGSToJTSK (phi_WGS, la_WGS):
     kn = (tan(phi0/2+pi/4)**alpha*((1-sqrt(e2_Bes)*sin(phi0))/(1+sqrt(e2_Bes)*sin(phi0)))**(alpha*sqrt(e2_Bes)/2))
     kd = tan(u0/2+pi/4)
     k = kn / kd
+
+    
     
 #Input coordinates
 phi_WGS = 50 * pi/180
