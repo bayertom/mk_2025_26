@@ -1,4 +1,5 @@
 from math import *
+from uvtosd import*
 
 def WGSToJTSK (phi_WGS, la_WGS):
     #WGS84 parameters
@@ -55,6 +56,27 @@ def WGSToJTSK (phi_WGS, la_WGS):
     #Gauss conformal projection
     u = 2*(atan(1/k*(tan(phi_Bes/2+pi/4)*((1-sqrt(e2_Bes))/(1+sqrt(e2_Bes)))**(sqrt(e2_Bes)/2))**alpha))-pi/2
     v = alpha*la_Ferro
+    
+    #Cartographic pole
+    uk = (59+(42/60)+(42.6969/3600))*(pi/180)
+    vk = (42+(31/60)+(31.41725/3600))*(pi/180)
+    
+    #Conversion (u, v) -> (s, d)
+    s, d = uvTosd(u, v, uk, vk)
+    
+    #LCC
+    s0 = 78.5 * pi/180
+    rho0 = R*1/tan(s0)*0.9999
+    c = sin(s0)
+    
+    rho = rho0*((tan(s0/2+pi/4))/(tan(s/2+pi/4)))**c
+    eps = c * d
+    
+    # (rho, eps) -> (y, x)
+    y_jtsk = rho*sin(eps)
+    x_jtsk = rho*cos(eps)
+    
+    print(y_jtsk, x_jtsk)
  
 #Input coordinates
 phi_WGS = 50 * pi/180

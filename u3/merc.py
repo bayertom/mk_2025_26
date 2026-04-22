@@ -1,6 +1,6 @@
 from math import *
 
-#Optimal conformal projection
+#Optimal Mercator projection
 
 #Poin ts on the quator
 u1 = 28.739286806*pi/180
@@ -41,4 +41,4 @@ ny2 = (m2 -1) *1000
 ny3 = (m3 -1) *1000
 ny4 = (m4 -1) *1000
 
-print(m1)
+print(ny1, ny2, ny3, ny4)
