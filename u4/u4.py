@@ -31,8 +31,12 @@ lat_min = -80
 lat_max = 80
 lon_min = -180
 lon_max = 180
-nlat = 10
-nlon = 10
+Dlat = 5
+Dlon = 5
+dlat = 0.1 * Dlat
+dlon = 0.1 * Dlon
+nlat = 100
+nlon = 100
 
 #Create intervals
 lat = linspace(lat_min, lat_max, nlat)
