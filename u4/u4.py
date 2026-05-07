@@ -16,9 +16,31 @@ def project(proj_name, R_z, lat, lon, lat0):
 
     return X, Y, a, b 
 
+def graticule(lat_min, lon_min, lat_max, lon_max, Dlat, Dlon, dlat, dlon, R, lat0, proj_name):
+    #Create graticule of the given map projection
+    #Create meridians
+    lat_mer = arange(lat_min, lat_max + dlat/2, dlat)
+    lon_mer = arange(lon_min, lon_max + Dlon/2, Dlon)
+    
+    #Create parallels
+    lat_par = arange(lat_min, lat_max + Dlat/2, Dlat)
+    lon_par = arange(lon_min, lon_max + dlon/2, dlon)
+
+    #Create meshgrid
+    lat_merg, lon_merg = meshgrid(lat_mer, lon_mer)
+    lat_parg, lon_parg = meshgrid(lat_par, lon_par)
+    
+    #Project meridians
+    mer_proj = project(proj_name, R, lat_merg, lon_merg, lat0)
+
+    #Project parallels
+    par_proj = project(proj_name, R, lat_parg, lon_parg, lat0)
+    
+    return mer_proj, par_proj   
+
 #Define projection
 proj_name = "sinu"
-#proj_name = "bonne"
+proj_name = "bonne"
 #proj_name = "eck5"
 #proj_name = "wintri"
 #proj_name = "aitoff"
@@ -31,8 +53,8 @@ lat_min = -80
 lat_max = 80
 lon_min = -180
 lon_max = 180
-Dlat = 5
-Dlon = 5
+Dlat = 10
+Dlon = 10
 dlat = 0.1 * Dlat
 dlon = 0.1 * Dlon
 nlat = 100
@@ -80,7 +102,33 @@ lonc = continents[:, 1]
 Xc, Yc, ac, bc = project(proj_name, R, latc, lonc, lat0)
 
 #Draw points
-plot(Xc, Yc)
+plot(Xc, Yc, linewidth = 2)
+
+#Create meridians and parallels
+mer_proj, par_proj = graticule(lat_min, lon_min, lat_max, lon_max, Dlat, Dlon, dlat, dlon, R, lat0, proj_name)
+
+#Extract coordinates
+Xm = mer_proj[0]
+Ym = mer_proj[1]
+
+Xp = par_proj[0]
+Yp = par_proj[1]
+
+#PLot meridians and parallels
+plot(transpose(Xm), transpose(Ym), color = 'black', linewidth = 0.5)
+#plot(transpose(Xp), transpose(Yp))
+
+#Variable map scale
+S = 100000000
+Sv = S/a
+
+#Create contour lines
+dS = arange(20000000, 200000000, 10000000)
+contours = contour(X, Y, Sv, levels = dS, colors = 'red')
+
+#Create contour labels
+clabel(contours, inline_spacing = -20)
+
 show()
 
-print(Xc)
+
