@@ -28,7 +28,7 @@ def graticule(lat_min, lon_min, lat_max, lon_max, Dlat, Dlon, dlat, dlon, R, lat
 
     #Create meshgrid
     lat_merg, lon_merg = meshgrid(lat_mer, lon_mer)
-    lat_parg, lon_parg = meshgrid(lat_par, lon_par)
+    lon_parg, lat_parg = meshgrid(lon_par, lat_par)
     
     #Project meridians
     mer_proj = project(proj_name, R, lat_merg, lon_merg, lat0)
@@ -116,7 +116,7 @@ Yp = par_proj[1]
 
 #PLot meridians and parallels
 plot(transpose(Xm), transpose(Ym), color = 'black', linewidth = 0.5)
-#plot(transpose(Xp), transpose(Yp))
+plot(transpose(Xp), transpose(Yp), color = 'black', linewidth = 0.5)
 
 #Variable map scale
 S = 100000000
